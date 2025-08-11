@@ -97,6 +97,9 @@ const StyledWrapper = styled.div`
     justify-content: space-between;
     position: relative;
 
+    width: 80%;
+    margin: 0 auto;
+
     .about-l {
       .top {
         h2 {

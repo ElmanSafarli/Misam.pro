@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
 
-import { About, Partners } from "../../widgets";
+import { About, ConsultExpert, Partners, Products } from "../../widgets";
 
 const Header = () => {
   return (
@@ -27,6 +27,8 @@ const Header = () => {
         <Partners />
       </header>
       <About />
+      <Products />
+      <ConsultExpert />
     </StyledWrapper>
   );
 };

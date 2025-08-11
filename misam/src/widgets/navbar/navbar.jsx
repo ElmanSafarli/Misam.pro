@@ -10,7 +10,9 @@ const Navbar = () => {
       <nav>
         <div className="navbar_container">
           <div className="logo">
-            <img src={Logo} alt="Misam" />
+            <Link to="/">
+              <img src={Logo} alt="Misam" />
+            </Link>
           </div>
           <div className="nav_items">
             <ul>
@@ -37,11 +39,11 @@ const Navbar = () => {
 const StyledWrapper = styled.div`
   nav {
     .navbar_container {
-      position: fixed; /* Добавлено */
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      margin: 0 auto; /* Центрируем */
+      margin: 0 auto;
       z-index: 1000;
       display: flex;
       align-items: center;
@@ -62,11 +64,13 @@ const StyledWrapper = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
-
-        img {
-          width: 100%;
-          height: 80%;
-          margin-left: 22px;
+        a {
+          height: 100%;
+          outline: none;
+          img {
+            height: 100%;
+            margin-left: 22px;
+          }
         }
       }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 
-// Импортируем все логотипы из папки
 const importAll = (r) => r.keys().map(r);
 const logos = importAll(
   require.context(
@@ -12,7 +11,6 @@ const logos = importAll(
 );
 
 const Partners = () => {
-  // Дублируем логотипы, чтобы бесконечно крутились
   const allLogos = [...logos, ...logos];
 
   return (
