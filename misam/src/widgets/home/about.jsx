@@ -92,21 +92,45 @@ const About = () => {
 const StyledWrapper = styled.div`
   padding: 140px 4%;
 
+  @media (max-width: 420px) {
+    padding: 120px 4% 60px;
+  }
+
   .about-content {
     display: flex;
     justify-content: space-between;
     position: relative;
-
+    gap: 20px;
     width: 80%;
     margin: 0 auto;
+    transition: all 0.3s ease;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+
+    @media (max-width: 840px) {
+      flex-direction: column;
+    }
 
     .about-l {
       .top {
+        .section_name {
+          p {
+            color: var(--grey-font);
+            font-weight: 400;
+            font-size: 16px;
+          }
+        }
         h2 {
           font-weight: 600;
           font-size: 30px;
           max-width: 570px;
           width: 100%;
+
+          @media (max-width: 640px) {
+            font-size: 22px;
+          }
         }
       }
       .bottom {
@@ -117,6 +141,10 @@ const StyledWrapper = styled.div`
           max-width: 458px;
           width: 100%;
           margin-top: 150px;
+
+          @media (max-width: 840px) {
+            margin-top: 20px;
+          }
         }
 
         a {
@@ -151,6 +179,19 @@ const StyledWrapper = styled.div`
         border-radius: 10px;
         transition: transform 0.3s ease;
         backdrop-filter: blur(6px);
+        transition: all 0.3s ease;
+
+        @media (max-width: 1020px) {
+          width: 392px;
+        }
+
+        @media (max-width: 840px) {
+          width: 100%;
+        }
+
+        @media (max-width: 640px) {
+          padding: 24px 20px;
+        }
 
         &:hover {
           transform: translateY(-5px);

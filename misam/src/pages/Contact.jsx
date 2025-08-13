@@ -158,7 +158,7 @@ const StyledWrapper = styled.div`
   #contact_us {
     padding: 100px 0;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 6% auto 0;
   }
   .contact_us_title {
     font-weight: 700;

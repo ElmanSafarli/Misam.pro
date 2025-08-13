@@ -40,6 +40,14 @@ const StyledWrapper = styled.div`
   margin-top: 152px;
   position: relative;
 
+  @media (max-width: 768px) {
+    margin-top: 120px;
+  }
+
+  @media (max-width: 460px) {
+    margin-top: 60px;
+  }
+
   .scroll-container {
     border-top: 2px solid #f3f3f3;
     border-bottom: 2px solid #f3f3f3;
@@ -51,6 +59,11 @@ const StyledWrapper = styled.div`
       width: 100px;
       height: 200px;
       pointer-events: none;
+
+      @media (max-width: 768px) {
+        width: 40px;
+        height: 140px;
+      }
     }
     .shadow:nth-child(1) {
       left: 0;
@@ -70,12 +83,21 @@ const StyledWrapper = styled.div`
     margin: auto;
     width: 80%;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+      width: calc(100% - 80px);
+    }
+
     .logo-track {
       display: flex;
       gap: 40px;
       animation: ${scroll} 60s linear infinite;
       width: fit-content;
       padding: 46px 20px;
+
+      @media (max-width: 768px) {
+        padding: 30px 10px;
+      }
     }
   }
 
@@ -85,6 +107,10 @@ const StyledWrapper = styled.div`
     opacity: 0.8;
     transition: 0.3s;
     flex-shrink: 0;
+
+    @media (max-width: 768px) {
+      height: 26px;
+    }
   }
 
   .logo-track img:hover {

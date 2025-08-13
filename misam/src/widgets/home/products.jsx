@@ -132,6 +132,11 @@ const Services = () => {
 
 const StyledWrapper = styled.section`
   padding: 120px 4%;
+
+  @media (max-width: 420px) {
+    padding: 60px 4%;
+  }
+
   .section-header {
     text-align: center;
     margin-bottom: 50px;
@@ -144,12 +149,20 @@ const StyledWrapper = styled.section`
       font-weight: 700;
       color: var(--black);
       margin-bottom: 15px;
+
+      @media (max-width: 420px) {
+        font-size: 24px;
+      }
     }
 
     p {
       font-size: 16px;
       line-height: 1.5;
       color: var(--grey-font);
+
+      @media (max-width: 420px) {
+        font-size: 14px;
+      }
     }
   }
   .card-overlay {
@@ -168,6 +181,11 @@ const StyledWrapper = styled.section`
     gap: 20px;
     width: 80%;
     margin: 0 auto;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
     .card {
       position: relative;
       padding: 0px;
@@ -175,6 +193,15 @@ const StyledWrapper = styled.section`
       flex: 0 0 40%;
       box-sizing: border-box;
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        flex: 0 0 100%;
+      }
+
+      @media (max-width: 420px) {
+        height: 300px;
+      }
+
       .card-content {
         position: relative;
         border-radius: 20px;
@@ -222,6 +249,10 @@ const StyledWrapper = styled.section`
     .card:nth-child(4n + 1),
     .card:nth-child(4n + 4) {
       flex: 0 1 calc(60% - 20px);
+
+      @media (max-width: 768px) {
+        flex: 0 1 100%;
+      }
     }
   }
   .card-content-container.open {
@@ -237,6 +268,7 @@ const StyledWrapper = styled.section`
     width: 100%;
     height: 100%;
     cursor: pointer;
+
     .open-card-content {
       max-width: 700px;
       border-radius: 20px;
@@ -245,6 +277,11 @@ const StyledWrapper = styled.section`
       overflow: hidden;
       position: relative;
       cursor: default;
+
+      @media (max-width: 768px) {
+        margin: auto 2%;
+      }
+
       .card-img {
         height: 420px;
         img {

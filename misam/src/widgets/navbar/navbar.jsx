@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
 
 import { Logo, NavBTN } from "../../shared";
 
 const Navbar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <StyledWrapper>
       <nav>
@@ -14,6 +16,7 @@ const Navbar = () => {
               <img src={Logo} alt="Misam" />
             </Link>
           </div>
+
           <div className="nav_items">
             <ul>
               <li>
@@ -27,11 +30,46 @@ const Navbar = () => {
               </li>
             </ul>
           </div>
+
           <div className="link">
             <NavBTN content="Contact" link="/contact" />
           </div>
+
+          <div className="mobile_sidebar" onClick={() => setSidebarOpen(true)}>
+            ☰
+          </div>
         </div>
       </nav>
+
+      {sidebarOpen && (
+        <div className="overlay" onClick={() => setSidebarOpen(false)} />
+      )}
+
+      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
+        <button className="close_btn" onClick={() => setSidebarOpen(false)}>
+          ✕
+        </button>
+        <ul>
+          <li>
+            <Link to="/" onClick={() => setSidebarOpen(false)}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={() => setSidebarOpen(false)}>
+              Services
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" onClick={() => setSidebarOpen(false)}>
+              About us
+            </Link>
+          </li>
+          <li>
+            <NavBTN content="Contact" link="/contact" />
+          </li>
+        </ul>
+      </div>
     </StyledWrapper>
   );
 };
@@ -40,14 +78,15 @@ const StyledWrapper = styled.div`
   nav {
     .navbar_container {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
+      top: 26px; /* отступ сверху */
+      left: 50%;
+      transform: translateX(-50%); /* центрируем по горизонтали */
+
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       border: 1px solid #f8f8f8;
       border-radius: 20px;
       max-width: 836px;
@@ -55,7 +94,6 @@ const StyledWrapper = styled.div`
       height: 70px;
       box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.2);
       background: var(--white);
-      margin: 26px auto;
 
       .logo {
         border-right: 1px solid #f8f8f8;
@@ -66,7 +104,10 @@ const StyledWrapper = styled.div`
         justify-content: center;
         a {
           height: 100%;
-          outline: none;
+
+          @media (max-width: 768px) {
+            height: 70%;
+          }
           img {
             height: 100%;
             margin-left: 22px;
@@ -86,13 +127,14 @@ const StyledWrapper = styled.div`
               transition: all 0.3s ease-in-out;
               font-weight: 400;
               font-size: 15px;
-              outline: none;
-
               &:hover {
                 color: var(--black);
               }
             }
           }
+        }
+        @media (max-width: 768px) {
+          display: none;
         }
       }
 
@@ -102,7 +144,67 @@ const StyledWrapper = styled.div`
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      .mobile_sidebar {
+        display: none;
+        font-size: 24px;
+        padding: 0 20px;
+        cursor: pointer;
+        @media (max-width: 768px) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  /* ЗАТЕМНЕНИЕ */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 900;
+  }
+
+  /* САЙДБАР */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: -260px;
+    width: 260px;
+    height: 100%;
+    background: var(--white);
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1001;
+    padding: 20px;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+      right: 0;
+    }
+
+    .close_btn {
+      align-self: flex-end;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 20px 0;
+      li {
+        margin: 15px 0;
+        a {
+          color: var(--black);
+          font-size: 18px;
+        }
       }
     }
   }

@@ -69,12 +69,20 @@ const StyledWrapper = styled.section`
   .contact-us {
     padding: 0 4%;
     margin-top: 130px;
+
+    @media (max-width: 768px) {
+      margin-top: 60px;
+    }
   }
 
   .contact-us .content {
     position: relative;
     height: 538px;
     width: 100%;
+
+    @media (max-width: 768px) {
+      height: 400px;
+    }
   }
 
   .contact-us .content .main {
@@ -85,9 +93,17 @@ const StyledWrapper = styled.section`
     border-radius: 40px;
     overflow: hidden;
 
+    @media (max-width: 460px) {
+      border-radius: 16px;
+    }
+
     img {
       width: 100%;
       object-fit: cover;
+
+      @media (max-width: 768px) {
+        height: 100%;
+      }
     }
   }
 
@@ -105,6 +121,18 @@ const StyledWrapper = styled.section`
     align-items: center;
     justify-content: center;
     text-align: center;
+
+    @media (max-width: 768px) {
+      width: 80%;
+      border-radius: 80px 80px 0 0;
+      height: 270px;
+    }
+
+    @media (max-width: 460px) {
+      width: 90%;
+      border-radius: 10px 20px 0 0;
+      height: 200px;
+    }
   }
 
   .contact-us .content .info h3 {
@@ -114,6 +142,15 @@ const StyledWrapper = styled.section`
     max-width: 494px;
     width: 80%;
     margin: 0 auto 40px;
+    transition: 0.3s all;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+
+    @media (max-width: 460px) {
+      font-size: 15px;
+    }
   }
 
   .contact-us .content .info h3 span {
@@ -134,6 +171,11 @@ const StyledWrapper = styled.section`
     background: var(--black);
     margin: auto;
     border: 2px solid var(--black);
+
+    @media (max-width: 460px) {
+      width: 80%;
+      font-size: 15px;
+    }
   }
 
   .contact-us .content .info a:hover {

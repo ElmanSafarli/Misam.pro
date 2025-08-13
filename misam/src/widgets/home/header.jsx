@@ -58,6 +58,18 @@ const StyledWrapper = styled.div`
         line-height: 128%;
         margin-bottom: 20px;
         margin-top: 220px;
+
+        @media (max-width: 768px) {
+          font-size: 36px;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 28px;
+          width: 90%;
+          br {
+            display: none;
+          }
+        }
         span {
           opacity: 0.4;
         }
@@ -70,6 +82,10 @@ const StyledWrapper = styled.div`
         margin: 0 auto;
         text-align: center;
         color: var(--grey-font);
+
+        @media (max-width: 480px) {
+          font-size: 14px;
+        }
       }
       .links {
         margin-top: 30px;
@@ -78,6 +94,7 @@ const StyledWrapper = styled.div`
         gap: 12px;
         position: relative;
         z-index: 2;
+        flex-wrap: wrap;
 
         a {
           padding: 14px 38px;
@@ -86,6 +103,10 @@ const StyledWrapper = styled.div`
           font-weight: 500;
           font-size: 17px;
           transition: all 0.3s ease-in-out;
+
+          @media (max-width: 480px) {
+            font-size: 14px;
+          }
         }
         a:nth-child(1) {
           background: var(--accent);
