@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { A2P, API, P2A, P2P, SIP, VirtualCall } from "../../shared";
@@ -44,20 +44,46 @@ const services = [
 
 const Services = () => {
   const [activeCard, setActiveCard] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(4);
+  const [cardsPerStep, setCardsPerStep] = useState(4);
+
+  useEffect(() => {
+    const updateStep = () => {
+      if (window.innerWidth <= 768) {
+        setCardsPerStep(2);
+        setVisibleCount(2);
+      } else {
+        setCardsPerStep(4);
+        setVisibleCount(4);
+      }
+    };
+
+    updateStep();
+    window.addEventListener("resize", updateStep);
+    return () => window.removeEventListener("resize", updateStep);
+  }, []);
+
+  const handleLoadMore = () => {
+    if (visibleCount >= services.length) {
+      setVisibleCount(cardsPerStep);
+    } else {
+      setVisibleCount((prev) => Math.min(prev + cardsPerStep, services.length));
+    }
+  };
 
   return (
     <StyledWrapper>
       <div className="section-header">
         <h2>Our products</h2>
         <p>
-          We offer a comprehensive service that allows you to manage all your
-          SMS needs from one place. From cleansing mobile data to launching your
-          first campaign, our simple online interface enables you to seamlessly
-          integrate SMS into your business today.
+          We provide all-in-one SMS services — from data cleaning to campaign
+          launch — with a simple interface that integrates seamlessly into your
+          business.
         </p>
       </div>
+
       <ul className="card-list">
-        {services.map((service, index) => (
+        {services.slice(0, visibleCount).map((service, index) => (
           <motion.li
             className="card"
             key={index}
@@ -86,6 +112,16 @@ const Services = () => {
         ))}
       </ul>
 
+      {/* Кнопка */}
+      {services.length > cardsPerStep && (
+        <div className="load-more-container">
+          <button onClick={handleLoadMore}>
+            {visibleCount >= services.length ? "Show Less" : "Load More"}
+          </button>
+        </div>
+      )}
+
+      {/* Модальное окно */}
       <AnimatePresence>
         {activeCard && (
           <>
@@ -138,11 +174,20 @@ const StyledWrapper = styled.section`
   }
 
   .section-header {
-    text-align: center;
-    margin-bottom: 50px;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 80%;
+    margin: 0 auto 50px;
+    display: flex;
+    aign-items: center;
+    justify-content: space-between;
+
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     h2 {
       font-size: 36px;
@@ -156,9 +201,11 @@ const StyledWrapper = styled.section`
     }
 
     p {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.5;
       color: var(--grey-font);
+      max-width: 440px;
+      width: 100%;
 
       @media (max-width: 420px) {
         font-size: 14px;
@@ -252,6 +299,35 @@ const StyledWrapper = styled.section`
 
       @media (max-width: 768px) {
         flex: 0 1 100%;
+      }
+    }
+  }
+
+  .load-more-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+
+    @media (max-width: 420px) {
+      margin-top: 24px;
+    }
+
+    button {
+      border-radius: 12px;
+      font-size: 16px;
+      padding: 12px 32px;
+      background-color: var(--black);
+      font-weight: 500;
+      color: var(--white);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: var(--white);
+        color: var(--black);
+        border: 1px solid var(--black);
       }
     }
   }

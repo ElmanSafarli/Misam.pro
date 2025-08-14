@@ -2,7 +2,14 @@ import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
 
-import { About, ConsultExpert, Partners, Products } from "../../widgets";
+import {
+  About,
+  ConsultExpert,
+  Faq,
+  Partners,
+  Products,
+  WhyChooseUs,
+} from "../../widgets";
 
 const Header = () => {
   return (
@@ -28,6 +35,8 @@ const Header = () => {
       </header>
       <About />
       <Products />
+      <WhyChooseUs />
+      <Faq />
       <ConsultExpert />
     </StyledWrapper>
   );

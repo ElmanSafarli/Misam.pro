@@ -67,8 +67,13 @@ const ConsultExpert = () => {
 
 const StyledWrapper = styled.section`
   .contact-us {
-    padding: 0 4%;
-    margin-top: 130px;
+    margin: 130px auto 0;
+    width: 80%;
+
+    @media (max-width: 1280px) {
+      width: 100%;
+      padding: 0 4%;
+    }
 
     @media (max-width: 768px) {
       margin-top: 60px;
@@ -100,10 +105,7 @@ const StyledWrapper = styled.section`
     img {
       width: 100%;
       object-fit: cover;
-
-      @media (max-width: 768px) {
-        height: 100%;
-      }
+      height: 100%;
     }
   }
 
