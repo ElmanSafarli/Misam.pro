@@ -6,4 +6,5 @@ export { default as Products } from "./home/products";
 export { default as ConsultExpert } from "./home/ConsultExpert";
 export { default as WhyChooseUs } from "./home/WhyChooseUs";
 export { default as Faq } from "./home/faq";
+export { default as Loader } from "./Loader";
 export { default as Footer } from "./Footer";

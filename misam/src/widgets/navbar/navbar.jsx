@@ -78,9 +78,9 @@ const StyledWrapper = styled.div`
   nav {
     .navbar_container {
       position: fixed;
-      top: 26px; /* отступ сверху */
+      top: 26px;
       left: 50%;
-      transform: translateX(-50%); /* центрируем по горизонтали */
+      transform: translateX(-50%);
 
       z-index: 1000;
       display: flex;
@@ -104,6 +104,7 @@ const StyledWrapper = styled.div`
         justify-content: center;
         a {
           height: 100%;
+          outline: none;
 
           @media (max-width: 768px) {
             height: 70%;

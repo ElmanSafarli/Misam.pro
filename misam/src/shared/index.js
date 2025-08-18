@@ -8,5 +8,15 @@ export { default as API } from "./assets/Services_img/API.jpg";
 
 export { default as BGCTA } from "./assets/home/cta-bg.jpg";
 
+// Service Icons
+export { default as A2PIcon } from "./assets/services_icons/a2p.png";
+export { default as P2PIcon } from "./assets/services_icons/p2p.png";
+export { default as P2AIcon } from "./assets/services_icons/p2a.png";
+export { default as SIPIcon } from "./assets/services_icons/voip.png";
+export { default as VirtualCallIcon } from "./assets/services_icons/virtual.png";
+export { default as APIIcon } from "./assets/services_icons/apis.png";
+
+export { default as AboutPage } from "./assets/home/about_page.png";
+
 export { Logo };
 export { NavBTN } from "./btns";

@@ -1,183 +1,332 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
-import { ConsultExpert, Footer, Navbar } from "../widgets";
+import { motion } from "framer-motion";
+import { ConsultExpert, Faq, Footer, Navbar, WhyChooseUs } from "../widgets";
+import { Link } from "react-router";
+import { services } from "../constants";
+import { AboutPage } from "../shared";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const About = () => {
+  const servicesRef = useRef(null);
+  const handleScrollToServices = () => {
+    servicesRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <StyledWrapper>
       <Navbar />
 
-      <main>
-        {/* Hero секция с крупным заголовком */}
-        <section className="hero">
-          <h1>About Us</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </section>
+      <header>
+        <motion.div
+          className="header-content"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="text-block">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+            >
+              Misam helps implement effective{" "}
+              <span>communication strategies</span> in the digital world
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              Misam is a modern communication platform that helps brands reach
+              their customers on their favorite devices — quickly, reliably, and
+              at scale
+            </motion.p>
 
-        {/* Первый блок: текст + изображение */}
-        <section className="content-block">
-          <div className="text">
-            <h2>Our Mission</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-              non urna vitae odio efficitur convallis. Donec ut eros quis sapien
-              convallis dapibus.
-            </p>
-            <p>
-              Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-              posuere cubilia curae; Integer dignissim purus nec fermentum
-              gravida.
-            </p>
+            <motion.div
+              className="cta"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <Link to="/contact" className="btn-primary">
+                Get Started
+              </Link>
+              <button
+                onClick={handleScrollToServices}
+                className="btn-secondary"
+              >
+                Learn More
+              </button>
+            </motion.div>
           </div>
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
-              alt="Our Mission"
-            />
-          </div>
-        </section>
 
-        {/* Второй блок: изображение + текст (чередуем) */}
-        <section className="content-block reverse">
-          <div className="image">
-            <img
-              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80"
-              alt="Our Team"
-            />
-          </div>
-          <div className="text">
-            <h2>Our Team</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Pellentesque suscipit ligula nec turpis convallis, sed tincidunt
-              lectus tristique.
-            </p>
-            <p>
-              Morbi in sem euismod, porttitor metus et, lacinia sapien. Duis
-              dictum facilisis erat, vitae fermentum nulla dapibus a.
-            </p>
-          </div>
-        </section>
+          <motion.div
+            className="image-block"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+          >
+            <img className="about-img" src={AboutPage} alt="About Misam" />
+          </motion.div>
+        </motion.div>
+      </header>
 
-        {/* Третий блок: простой текст, центрированный */}
-        <section className="final-block">
-          <h2>Why Choose Us</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-            erat volutpat. Mauris vel dui a nulla ultricies fringilla in eget
-            risus.
-          </p>
-        </section>
-      </main>
+      <section ref={servicesRef}>
+        <motion.div
+          className="services-content"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div className="services-group">
+            {services.map((service, index) => (
+              <motion.div
+                className="service-item"
+                key={index}
+                variants={itemVariants}
+                whileHover={{
+                  scale: 1.05,
+                  rotateX: 5,
+                  rotateY: -5,
+                  boxShadow: "0 15px 30px rgba(0,0,0,0.15)",
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Link to={service.link}>
+                  <div className="top">
+                    <div className="icon">
+                      <img src={service.icon} alt={service.title} />
+                    </div>
+                    <h3>{service.title}</h3>
+                  </div>
+                  <p>
+                    {service.description.length > 100
+                      ? service.description.slice(0, 100) + "..."
+                      : service.description}
+                  </p>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </section>
 
+      <WhyChooseUs />
+      <Faq />
       <ConsultExpert />
-
       <Footer />
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
-  main {
-    max-width: 1200px;
-    margin: 6% auto 0;
-    padding: 100px 0;
-    color: var(--black);
-  }
-
-  /* Hero секция */
-  .hero {
-    text-align: center;
-    margin-bottom: 80px;
-
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 18px;
-      color: var(--grey-font, #555);
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-  }
-
-  /* Контентные блоки с изображениями и текстом */
-  .content-block {
+  .header-content {
+    background: linear-gradient(135deg, var(--black) 0%, #1e1e1e 100%);
+    color: var(--white);
+    padding: 240px 8% 140px;
     display: flex;
     align-items: center;
-    gap: 60px;
-    margin-bottom: 100px;
+    justify-content: space-between;
+    position: relative;
+    gap: 40px;
 
-    .text {
-      flex: 1;
+    @media (max-width: 992px) {
+      flex-direction: column;
+      text-align: center;
+      padding: 140px 6% 100px;
+    }
 
-      h2 {
-        font-size: 32px;
+    .text-block {
+      max-width: 600px;
+      z-index: 2;
+
+      h1 {
         font-weight: 600;
-        margin-bottom: 16px;
+        font-size: 36px;
+
+        span {
+          color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+          font-size: 30px;
+        }
+
+        @media (max-width: 460px) {
+          font-size: 24px;
+        }
       }
 
       p {
-        font-size: 16px;
-        line-height: 1.7;
-        color: var(--grey-font, #555);
-        margin-bottom: 16px;
+        color: var(--grey-font);
+        margin-top: 24px;
+        font-size: 18px;
+        line-height: 1.6;
+
+        @media (max-width: 768px) {
+          font-size: 16px;
+        }
+
+        @media (max-width: 460px) {
+          font-size: 14px;
+        }
+      }
+
+      .cta {
+        margin-top: 36px;
+        display: flex;
+        gap: 16px;
+
+        @media (max-width: 768px) {
+          justify-content: center;
+        }
+
+        @media (max-width: 460px) {
+          gap: 8px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+          padding: 12px 28px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          font-weight: 500;
+          font-size: 16px;
+          border-radius: 10px;
+          cursor: pointer;
+          @media (max-width: 460px) {
+            padding: 10px 20px;
+            font-size: 14px;
+          }
+        }
+
+        .btn-primary {
+          background: var(--accent);
+          color: var(--white);
+
+          &:hover {
+            background: var(--white);
+            color: var(--accent);
+          }
+        }
+
+        .btn-secondary {
+          background: transparent;
+          border: 2px solid var(--white);
+          color: var(--white);
+
+          &:hover {
+            background: var(--white);
+            color: var(--black);
+          }
+        }
       }
     }
 
-    .image {
-      flex: 1;
+    .image-block {
+      position: relative;
 
-      img {
+      .about-img {
         width: 100%;
-        height: auto;
-        border-radius: 16px;
-        object-fit: cover;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        max-width: 500px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
       }
     }
   }
 
-  /* Для второго блока меняем порядок (чтобы изображение слева) */
-  .content-block.reverse {
-    flex-direction: row-reverse;
-  }
-
-  /* Финальный блок с простым текстом */
-  .final-block {
-    max-width: 700px;
+  .services-content {
+    max-width: 1200px;
     margin: 0 auto;
-    text-align: center;
+    padding: 120px 0;
 
-    h2 {
-      font-size: 36px;
-      font-weight: 600;
-      margin-bottom: 24px;
-    }
+    .services-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
 
-    p {
-      font-size: 18px;
-      line-height: 1.7;
-      color: var(--grey-font, #555);
-    }
-  }
+      @media (max-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+        padding: 0 4%;
+      }
 
-  /* Адаптив */
-  @media (max-width: 900px) {
-    .content-block {
-      flex-direction: column;
-      gap: 40px;
-    }
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
 
-    .content-block.reverse {
-      flex-direction: column;
+      .service-item {
+        border-radius: 18px;
+        border: 2px solid #dfdfdfff;
+        padding: 28px 22px;
+        background: var(--white);
+        perspective: 1000px;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          background: var(--black);
+          border-color: var(--accent);
+        }
+
+        &:hover h3,
+        &:hover p {
+          color: var(--white) !important;
+        }
+
+        &:hover .icon img {
+          filter: brightness(0) invert(1);
+        }
+
+        .top {
+          margin-bottom: 18px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+
+          .icon {
+            img {
+              width: 38px;
+              height: 38px;
+              transition: all 0.3s ease;
+            }
+          }
+
+          h3 {
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--black);
+          }
+        }
+
+        p {
+          transition: all 0.3s ease;
+          font-weight: 400;
+          color: var(--black);
+          font-size: 14px;
+        }
+      }
     }
   }
 `;
