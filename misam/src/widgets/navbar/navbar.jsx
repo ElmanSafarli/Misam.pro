@@ -1,11 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Logo, NavBTN } from "../../shared";
+import { services } from "../../constants";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const servicesRef = useRef(null);
+
+  // Закрыть Services при клике вне
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <StyledWrapper>
@@ -22,8 +36,27 @@ const Navbar = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-              <li>
-                <Link to="/contact">Services</Link>
+              <li ref={servicesRef} className="dropdown">
+                <span
+                  className="dropdown-toggle"
+                  onClick={() => setServicesOpen(!servicesOpen)}
+                >
+                  Services ▾
+                </span>
+                {servicesOpen && (
+                  <ul className="dropdown-menu">
+                    {services.map((service, idx) => (
+                      <li key={idx}>
+                        <Link
+                          to={service.link}
+                          onClick={() => setServicesOpen(false)}
+                        >
+                          {service.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
               <li>
                 <Link to="/about">About us</Link>
@@ -56,9 +89,29 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/contact" onClick={() => setSidebarOpen(false)}>
-              Services
-            </Link>
+            <span
+              className="dropdown-toggle"
+              onClick={() => setServicesOpen(!servicesOpen)}
+            >
+              Services ▾
+            </span>
+            {servicesOpen && (
+              <ul className="dropdown-menu">
+                {services.map((service, idx) => (
+                  <li key={idx}>
+                    <Link
+                      to={service.link}
+                      onClick={() => {
+                        setServicesOpen(false);
+                        setSidebarOpen(false);
+                      }}
+                    >
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
           <li>
             <Link to="/about" onClick={() => setSidebarOpen(false)}>
@@ -81,12 +134,10 @@ const StyledWrapper = styled.div`
       top: 26px;
       left: 50%;
       transform: translateX(-50%);
-
       z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       border: 1px solid #f8f8f8;
       border-radius: 20px;
       max-width: 836px;
@@ -105,10 +156,6 @@ const StyledWrapper = styled.div`
         a {
           height: 100%;
           outline: none;
-
-          @media (max-width: 768px) {
-            height: 70%;
-          }
           img {
             height: 100%;
             margin-left: 22px;
@@ -122,14 +169,48 @@ const StyledWrapper = styled.div`
           display: flex;
           list-style: none;
           li {
+            position: relative;
             margin: 0 10px;
-            a {
+            a,
+            span {
               color: var(--grey-font);
               transition: all 0.3s ease-in-out;
               font-weight: 400;
               font-size: 15px;
+              cursor: pointer;
               &:hover {
                 color: var(--black);
+              }
+            }
+          }
+          .dropdown-menu {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            background: var(--white);
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            list-style: none;
+            padding: 10px;
+            min-width: 180px;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+
+            li {
+              margin: 0;
+              padding: 0;
+              a {
+                display: block;
+                padding: 8px 10px;
+                font-size: 14px;
+                color: var(--black);
+                border-radius: 4px;
+                &:hover {
+                  background: var(--accent);
+                  color: var(--white);
+                }
               }
             }
           }
@@ -162,7 +243,6 @@ const StyledWrapper = styled.div`
     }
   }
 
-  /* ЗАТЕМНЕНИЕ */
   .overlay {
     position: fixed;
     inset: 0;
@@ -170,7 +250,6 @@ const StyledWrapper = styled.div`
     z-index: 900;
   }
 
-  /* САЙДБАР */
   .sidebar {
     position: fixed;
     top: 0;
@@ -200,11 +279,20 @@ const StyledWrapper = styled.div`
     ul {
       list-style: none;
       padding: 20px 0;
+      margin: 0;
       li {
-        margin: 15px 0;
-        a {
+        a,
+        span {
           color: var(--black);
           font-size: 18px;
+          cursor: pointer;
+        }
+        .dropdown-menu {
+          margin-top: 10px;
+          padding-left: 10px;
+          li a {
+            font-size: 16px;
+          }
         }
       }
     }

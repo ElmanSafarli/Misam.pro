@@ -31,7 +31,7 @@ const StyledWrapper = styled.div`
     grid-area: 1/1;
     width: 44.8px;
     height: 44.8px;
-    background: var(--accent);
+    background: var(--black);
     animation: blob-rhf26m 2s infinite;
   }
 

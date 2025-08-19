@@ -1,10 +1,11 @@
 // Navigate.jsx
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Loader } from "../../widgets";
-
 // Components
-import { About, Contact, Home } from "../../pages";
+import { Loader } from "../../widgets";
+import { About, Contact, Home, ServicePage } from "../../pages";
+// Constants
+import { services } from "../../constants";
 
 const Navigate = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,6 +28,13 @@ const Navigate = () => {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      {services.map((service, index) => (
+        <Route
+          key={index}
+          path={service.link}
+          element={<ServicePage data={service} />}
+        />
+      ))}
     </Routes>
   );
 };
