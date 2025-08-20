@@ -2,155 +2,163 @@ import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
 import { Footer, Navbar } from "../widgets";
+import { Pagetitle } from "../modules";
 
 const About = () => {
   return (
-    <StyledWrapper>
-      <Navbar />
+    <>
+      <Pagetitle
+        title="Misam | Contact Us"
+        description="Contact Us Page | Misam"
+      />
+      <StyledWrapper>
+        <Navbar />
 
-      <section id="contact_us">
-        <div class="section_name" style={{ justifyContent: "start" }}>
-          <div></div>
-          <p>Contact Us</p>
-        </div>
-        <h2 class="contact_us_title" style={{ color: "var(--black)" }}>
-          Join Us in Creating <br />
-          <span>Something Great</span>
-        </h2>
-        <div class="contact_us_form">
-          <form action="">
-            <div class="contact_us_inputs">
-              <div class="grid_input">
-                <div class="user_input">
-                  <input type="text" name="username" id="username" required />
-                  <label for="username">First Name*</label>
+        <section id="contact_us">
+          <div class="section_name" style={{ justifyContent: "start" }}>
+            <div></div>
+            <p>Contact Us</p>
+          </div>
+          <h2 class="contact_us_title" style={{ color: "var(--black)" }}>
+            Join Us in Creating <br />
+            <span>Something Great</span>
+          </h2>
+          <div class="contact_us_form">
+            <form action="">
+              <div class="contact_us_inputs">
+                <div class="grid_input">
+                  <div class="user_input">
+                    <input type="text" name="username" id="username" required />
+                    <label for="username">First Name*</label>
+                  </div>
+                  <div class="user_input">
+                    <input type="text" name="lastname" id="lastname" required />
+                    <label for="lastname">Last Name*</label>
+                  </div>
+                  <div class="user_input">
+                    <input
+                      type="text"
+                      name="user_position"
+                      id="user_position"
+                      required
+                    />
+                    <label for="user_position">Position*</label>
+                  </div>
+                  <div class="user_input">
+                    <input
+                      type="text"
+                      name="company_name"
+                      id="company_name"
+                      required
+                    />
+                    <label for="company_name">Company Name*</label>
+                  </div>
+                  <div class="user_input">
+                    <input type="email" name="email" id="email" required />
+                    <label for="email">Company Email*</label>
+                  </div>
+                  <div class="user_input">
+                    <input
+                      type="url"
+                      name="company_url"
+                      id="company_url"
+                      pattern="https://.*"
+                      required
+                    />
+                    <label for="company_url">Website URL</label>
+                  </div>
+                  <div class="user_input">
+                    <input
+                      type="tel"
+                      name="user_phone"
+                      id="user_phone"
+                      required
+                    />
+                    <label for="user_phone">Phone number</label>
+                  </div>
+                  <div class="user_input">
+                    <input type="text" id="country_selector" name="country" />
+                  </div>
                 </div>
-                <div class="user_input">
-                  <input type="text" name="lastname" id="lastname" required />
-                  <label for="lastname">Last Name*</label>
-                </div>
-                <div class="user_input">
-                  <input
-                    type="text"
-                    name="user_position"
-                    id="user_position"
+                <div class="user_input user_textarea">
+                  <textarea
+                    name="user_message"
+                    id="user_message"
                     required
-                  />
-                  <label for="user_position">Position*</label>
-                </div>
-                <div class="user_input">
-                  <input
-                    type="text"
-                    name="company_name"
-                    id="company_name"
-                    required
-                  />
-                  <label for="company_name">Company Name*</label>
-                </div>
-                <div class="user_input">
-                  <input type="email" name="email" id="email" required />
-                  <label for="email">Company Email*</label>
-                </div>
-                <div class="user_input">
-                  <input
-                    type="url"
-                    name="company_url"
-                    id="company_url"
-                    pattern="https://.*"
-                    required
-                  />
-                  <label for="company_url">Website URL</label>
-                </div>
-                <div class="user_input">
-                  <input
-                    type="tel"
-                    name="user_phone"
-                    id="user_phone"
-                    required
-                  />
-                  <label for="user_phone">Phone number</label>
-                </div>
-                <div class="user_input">
-                  <input type="text" id="country_selector" name="country" />
+                  ></textarea>
+                  <label for="user_message">Message*</label>
                 </div>
               </div>
-              <div class="user_input user_textarea">
-                <textarea
-                  name="user_message"
-                  id="user_message"
-                  required
-                ></textarea>
-                <label for="user_message">Message*</label>
+              <button type="submit">
+                <div class="svg-wrapper-1">
+                  <div class="svg-wrapper">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                    >
+                      <path fill="none" d="M0 0h24v24H0z"></path>
+                      <path
+                        fill="currentColor"
+                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+                <span>Send</span>
+              </button>
+            </form>
+            <div class="contact-info">
+              <div class="contact-info-item">
+                <h4>Adress</h4>
+                <p>Ithakis 3 C1-301, Nicosia, Strovolos 2058, CY</p>
               </div>
-            </div>
-            <button type="submit">
-              <div class="svg-wrapper-1">
-                <div class="svg-wrapper">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
+
+              <div class="contact-info-item">
+                <h4>Contact</h4>
+                <p>
+                  Phone : <a href="tel:+35724020230">+35724020230</a>
+                </p>
+                <p>
+                  Email :
+                  <a href="mailto:info@stertell.com">info@stertell.com</a>
+                </p>
+              </div>
+
+              <div class="contact-info-item">
+                <h4>Open Time</h4>
+                <p>Monday - Friday: 9am - 5pm</p>
+                <p>Saturday - Sunday: Closed</p>
+              </div>
+
+              <div class="contact-info-item">
+                <h4>Stay Connected</h4>
+                <div class="social_medias">
+                  <Link
+                    to="https://www.facebook.com/profile.php?id=100086738514430"
+                    aria-label="facebook"
                   >
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <path
-                      fill="currentColor"
-                      d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
-                    ></path>
-                  </svg>
+                    <i class="fa-brands fa-facebook-f"></i>
+                  </Link>
+                  <Link
+                    to="https://www.linkedin.com/company/stertell/"
+                    aria-label="linkedin"
+                  >
+                    <i class="fa-brands fa-linkedin-in"></i>
+                  </Link>
+                  <Link to="">
+                    <i class="fa-brands fa-telegram"></i>
+                  </Link>
                 </div>
-              </div>
-              <span>Send</span>
-            </button>
-          </form>
-          <div class="contact-info">
-            <div class="contact-info-item">
-              <h4>Adress</h4>
-              <p>Ithakis 3 C1-301, Nicosia, Strovolos 2058, CY</p>
-            </div>
-
-            <div class="contact-info-item">
-              <h4>Contact</h4>
-              <p>
-                Phone : <a href="tel:+35724020230">+35724020230</a>
-              </p>
-              <p>
-                Email :<a href="mailto:info@stertell.com">info@stertell.com</a>
-              </p>
-            </div>
-
-            <div class="contact-info-item">
-              <h4>Open Time</h4>
-              <p>Monday - Friday: 9am - 5pm</p>
-              <p>Saturday - Sunday: Closed</p>
-            </div>
-
-            <div class="contact-info-item">
-              <h4>Stay Connected</h4>
-              <div class="social_medias">
-                <Link
-                  to="https://www.facebook.com/profile.php?id=100086738514430"
-                  aria-label="facebook"
-                >
-                  <i class="fa-brands fa-facebook-f"></i>
-                </Link>
-                <Link
-                  to="https://www.linkedin.com/company/stertell/"
-                  aria-label="linkedin"
-                >
-                  <i class="fa-brands fa-linkedin-in"></i>
-                </Link>
-                <Link to="">
-                  <i class="fa-brands fa-telegram"></i>
-                </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <Footer />
-    </StyledWrapper>
+        <Footer />
+      </StyledWrapper>
+    </>
   );
 };
 

@@ -5,6 +5,7 @@ import { ConsultExpert, Faq, Footer, Navbar, WhyChooseUs } from "../widgets";
 import { Link } from "react-router";
 import { services } from "../constants";
 import { AboutPage } from "../shared";
+import { Pagetitle } from "../modules";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,109 +32,115 @@ const About = () => {
     servicesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <StyledWrapper>
-      <Navbar />
+    <>
+      <Pagetitle
+        title="About Misam"
+        description="Misam is a modern communication platform that helps brands reach their customers on their favorite devices — quickly, reliably, and at scale"
+      />
+      <StyledWrapper>
+        <Navbar />
 
-      <header>
-        <motion.div
-          className="header-content"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <div className="text-block">
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-            >
-              Misam helps implement effective{" "}
-              <span>communication strategies</span> in the digital world
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-            >
-              Misam is a modern communication platform that helps brands reach
-              their customers on their favorite devices — quickly, reliably, and
-              at scale
-            </motion.p>
+        <header>
+          <motion.div
+            className="header-content"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="text-block">
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                Misam helps implement effective{" "}
+                <span>communication strategies</span> in the digital world
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.6 }}
+              >
+                Misam is a modern communication platform that helps brands reach
+                their customers on their favorite devices — quickly, reliably,
+                and at scale
+              </motion.p>
+
+              <motion.div
+                className="cta"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.6 }}
+              >
+                <Link to="/contact" className="btn-primary">
+                  Get Started
+                </Link>
+                <button
+                  onClick={handleScrollToServices}
+                  className="btn-secondary"
+                >
+                  Learn More
+                </button>
+              </motion.div>
+            </div>
 
             <motion.div
-              className="cta"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
+              className="image-block"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.9, duration: 0.8 }}
             >
-              <Link to="/contact" className="btn-primary">
-                Get Started
-              </Link>
-              <button
-                onClick={handleScrollToServices}
-                className="btn-secondary"
-              >
-                Learn More
-              </button>
+              <img className="about-img" src={AboutPage} alt="About Misam" />
             </motion.div>
-          </div>
+          </motion.div>
+        </header>
 
+        <section ref={servicesRef}>
           <motion.div
-            className="image-block"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
+            className="services-content"
+            variants={containerVariants}
+            initial="hidden"
+            animate="show"
           >
-            <img className="about-img" src={AboutPage} alt="About Misam" />
-          </motion.div>
-        </motion.div>
-      </header>
-
-      <section ref={servicesRef}>
-        <motion.div
-          className="services-content"
-          variants={containerVariants}
-          initial="hidden"
-          animate="show"
-        >
-          <motion.div className="services-group">
-            {services.map((service, index) => (
-              <motion.div
-                className="service-item"
-                key={index}
-                variants={itemVariants}
-                whileHover={{
-                  scale: 1.05,
-                  rotateX: 5,
-                  rotateY: -5,
-                  boxShadow: "0 15px 30px rgba(0,0,0,0.15)",
-                }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Link to={service.link}>
-                  <div className="top">
-                    <div className="icon">
-                      <img src={service.icon} alt={service.title} />
+            <motion.div className="services-group">
+              {services.map((service, index) => (
+                <motion.div
+                  className="service-item"
+                  key={index}
+                  variants={itemVariants}
+                  whileHover={{
+                    scale: 1.05,
+                    rotateX: 5,
+                    rotateY: -5,
+                    boxShadow: "0 15px 30px rgba(0,0,0,0.15)",
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <Link to={service.link}>
+                    <div className="top">
+                      <div className="icon">
+                        <img src={service.icon} alt={service.title} />
+                      </div>
+                      <h3>{service.title}</h3>
                     </div>
-                    <h3>{service.title}</h3>
-                  </div>
-                  <p>
-                    {service.description.length > 100
-                      ? service.description.slice(0, 100) + "..."
-                      : service.description}
-                  </p>
-                </Link>
-              </motion.div>
-            ))}
+                    <p>
+                      {service.description.length > 100
+                        ? service.description.slice(0, 100) + "..."
+                        : service.description}
+                    </p>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </section>
+        </section>
 
-      <WhyChooseUs />
-      <Faq />
-      <ConsultExpert />
-      <Footer />
-    </StyledWrapper>
+        <WhyChooseUs />
+        <Faq />
+        <ConsultExpert />
+        <Footer />
+      </StyledWrapper>
+    </>
   );
 };
 

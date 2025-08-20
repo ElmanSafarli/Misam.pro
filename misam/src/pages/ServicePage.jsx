@@ -1,12 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { Navbar, Footer, ConsultExpert } from "../widgets";
+import { Pagetitle } from "../modules";
 
 const ServicePage = ({ data }) => {
   console.log(data);
   return (
     <>
-      {" "}
+      <Pagetitle
+        title={data.title + " | Misam Solutions"}
+        description={data.description}
+      />{" "}
       <Navbar />
       <StyledWrapper>
         <header className="service-header">
@@ -21,40 +25,41 @@ const ServicePage = ({ data }) => {
             </div>
           </div>
         </header>
+        <div className="solution-info">
+          {data.whatIs && (
+            <section className="what-is">
+              <h2>{data.whatIs.title}</h2>
+              <p>{data.whatIs.text}</p>
+              <ul>
+                {data.whatIs.list?.map((item, i) => (
+                  <li key={i}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-        {data.whatIs && (
-          <section className="what-is">
-            <h2>{data.whatIs.title}</h2>
-            <p>{data.whatIs.text}</p>
-            <ul>
-              {data.whatIs.list?.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        )}
+          {data.benefits && (
+            <section className="benefits">
+              <h2>Benefits of Using {data.title}</h2>
+              <ul>
+                {data.benefits.map((b, i) => (
+                  <li key={i}>{b}</li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-        {data.benefits && (
-          <section className="benefits">
-            <h2>Benefits of Using {data.title}</h2>
-            <ul>
-              {data.benefits.map((b, i) => (
-                <li key={i}>{b}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {data.whyChoose && (
-          <section className="why-choose">
-            <h2>Why Choose Our {data.title} Service?</h2>
-            <ul>
-              {data.whyChoose.map((w, i) => (
-                <li key={i}>{w}</li>
-              ))}
-            </ul>
-          </section>
-        )}
+          {data.whyChoose && (
+            <section className="why-choose">
+              <h2>Why Choose Our {data.title} Service?</h2>
+              <ul>
+                {data.whyChoose.map((w, i) => (
+                  <li key={i}>{w}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
       </StyledWrapper>
       <ConsultExpert />
       <Footer />
@@ -108,6 +113,15 @@ const StyledWrapper = styled.div`
         border-radius: 16px;
       }
     }
+  }
+
+  .solution-info {
+    padding: 60px 4%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   h2 {
