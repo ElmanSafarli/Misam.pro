@@ -4,15 +4,15 @@ import { Navbar, Footer, ConsultExpert } from "../widgets";
 import { Pagetitle } from "../modules";
 
 const ServicePage = ({ data }) => {
-  console.log(data);
   return (
     <>
       <Pagetitle
         title={data.title + " | Misam Solutions"}
         description={data.description}
-      />{" "}
+      />
       <Navbar />
       <StyledWrapper>
+        {/* Header */}
         <header className="service-header">
           <div className="content">
             <div className="text">
@@ -25,9 +25,11 @@ const ServicePage = ({ data }) => {
             </div>
           </div>
         </header>
+
+        {/* Info Sections */}
         <div className="solution-info">
           {data.whatIs && (
-            <section className="what-is">
+            <section className="what-is card">
               <h2>{data.whatIs.title}</h2>
               <p>{data.whatIs.text}</p>
               <ul>
@@ -39,7 +41,7 @@ const ServicePage = ({ data }) => {
           )}
 
           {data.benefits && (
-            <section className="benefits">
+            <section className="benefits card">
               <h2>Benefits of Using {data.title}</h2>
               <ul>
                 {data.benefits.map((b, i) => (
@@ -50,7 +52,7 @@ const ServicePage = ({ data }) => {
           )}
 
           {data.whyChoose && (
-            <section className="why-choose">
+            <section className="why-choose card">
               <h2>Why Choose Our {data.title} Service?</h2>
               <ul>
                 {data.whyChoose.map((w, i) => (
@@ -68,81 +70,136 @@ const ServicePage = ({ data }) => {
 };
 
 const StyledWrapper = styled.div`
+  /* ===== HEADER ===== */
   .service-header {
-    background: var(--black);
+    background: linear-gradient(135deg, var(--black), #1c1c1c);
     color: var(--white);
-    padding: 150px 4% 100px;
+    padding: 180px 6% 120px;
 
     .content {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 40px;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
 
-      .text {
-        max-width: 600px;
+    .text {
+      flex: 1;
+      max-width: 600px;
+      width: 100%;
 
-        h1 {
-          font-size: 36px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          margin-bottom: 12px;
+      h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.2;
 
-          .icon {
-            width: 40px;
-            height: 40px;
-          }
-        }
-
-        h2 {
-          font-size: 22px;
-          margin-bottom: 20px;
-          color: var(--accent);
-        }
-
-        p {
-          font-size: 18px;
-          color: var(--grey-font);
+        @media (max-width: 460px) {
+          font-size: 26px;
         }
       }
 
-      .image img {
-        max-width: 500px;
-        width: 100%;
-        border-radius: 16px;
+      h2 {
+        font-size: 22px;
+        margin-bottom: 24px;
+        color: var(--accent);
       }
+
+      p {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--grey-font);
+        @media (max-width: 460px) {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .image img {
+      max-width: 480px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      transition: transform 0.4s ease;
+    }
+
+    .image img:hover {
+      transform: scale(1.05);
     }
   }
 
+  /* ===== CONTENT ===== */
   .solution-info {
-    padding: 60px 4%;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
+    padding: 80px 6%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
     max-width: 1200px;
     margin: 0 auto;
   }
 
+  .card {
+    padding: 40px;
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @media (max-width: 460px) {
+      padding: 20px;
+    }
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    background: var(--white);
+  }
+
   h2 {
-    font-size: 26px;
+    font-size: 28px;
     margin-bottom: 20px;
-    font-weight: 600;
+    font-weight: 700;
+    color: var(--black);
+
+    @media (max-width: 460px) {
+      font-size: 18px;
+    }
   }
 
   p {
-    font-size: 16px;
-    color: var(--black);
+    font-size: 17px;
+    color: var(--grey-font);
+    line-height: 1.7;
+
+    @media (max-width: 460px) {
+      font-size: 14px;
+    }
   }
 
   ul {
-    margin-top: 15px;
-    list-style: disc inside;
+    margin-top: 20px;
+    list-style: none;
+    padding-left: 0;
 
     li {
-      margin-bottom: 10px;
+      position: relative;
+      padding-left: 28px;
+      margin-bottom: 14px;
       font-size: 16px;
-      color: var(--grey-font);
+      color: var(--black);
+      line-height: 1.6;
+
+      @media (max-width: 460px) {
+        font-size: 14px;
+      }
+    }
+
+    li::before {
+      content: "✔";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
     }
   }
 `;

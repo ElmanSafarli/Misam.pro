@@ -4,13 +4,16 @@ import styled from "styled-components";
 
 import { Logo, NavBTN } from "../../shared";
 import { services } from "../../constants";
+import { MobileSidebar } from "../../widgets";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef(null);
 
-  // Закрыть Services при клике вне
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (servicesRef.current && !servicesRef.current.contains(event.target)) {
@@ -41,7 +44,8 @@ const Navbar = () => {
                   className="dropdown-toggle"
                   onClick={() => setServicesOpen(!servicesOpen)}
                 >
-                  Services ▾
+                  Services
+                  <FontAwesomeIcon icon={faCaretDown} />
                 </span>
                 {servicesOpen && (
                   <ul className="dropdown-menu">
@@ -74,61 +78,20 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {sidebarOpen && (
-        <div className="overlay" onClick={() => setSidebarOpen(false)} />
-      )}
-
-      <div className={`sidebar ${sidebarOpen ? "open" : ""}`}>
-        <button className="close_btn" onClick={() => setSidebarOpen(false)}>
-          ✕
-        </button>
-        <ul>
-          <li>
-            <Link to="/" onClick={() => setSidebarOpen(false)}>
-              Home
-            </Link>
-          </li>
-          <li>
-            <span
-              className="dropdown-toggle"
-              onClick={() => setServicesOpen(!servicesOpen)}
-            >
-              Services ▾
-            </span>
-            {servicesOpen && (
-              <ul className="dropdown-menu">
-                {services.map((service, idx) => (
-                  <li key={idx}>
-                    <Link
-                      to={service.link}
-                      onClick={() => {
-                        setServicesOpen(false);
-                        setSidebarOpen(false);
-                      }}
-                    >
-                      {service.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-          <li>
-            <Link to="/about" onClick={() => setSidebarOpen(false)}>
-              About us
-            </Link>
-          </li>
-          <li>
-            <NavBTN content="Contact" link="/contact" />
-          </li>
-        </ul>
-      </div>
+      <MobileSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        servicesOpen={servicesOpen}
+        setServicesOpen={setServicesOpen}
+      />
     </StyledWrapper>
   );
 };
 
 const StyledWrapper = styled.div`
   nav {
+    position: relative;
+    z-index: 1001;
     .navbar_container {
       position: fixed;
       top: 26px;
@@ -168,6 +131,13 @@ const StyledWrapper = styled.div`
         ul {
           display: flex;
           list-style: none;
+
+          .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+          }
+
           li {
             position: relative;
             margin: 0 10px;
@@ -178,6 +148,11 @@ const StyledWrapper = styled.div`
               font-weight: 400;
               font-size: 15px;
               cursor: pointer;
+              display: inline-flex;
+              align-items: center;
+              gap: 6px;
+              white-space: nowrap;
+
               &:hover {
                 color: var(--black);
               }
@@ -192,7 +167,7 @@ const StyledWrapper = styled.div`
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             list-style: none;
             padding: 10px;
-            min-width: 180px;
+            min-width: 220px;
             z-index: 10;
             display: flex;
             flex-direction: column;

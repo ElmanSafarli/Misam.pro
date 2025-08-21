@@ -12,41 +12,39 @@ const Footer = () => {
             <img src={Logo} alt="" />
           </div>
           <address>
-            3891 Ranchview Dr. Richardson, California, United States Of America
-            62639
+            Azerbaijan Republic, Baku 1014, Bülbül Prospekti, Gulustan Residence
           </address>
-          <form className="subscribe_form" onSubmit={(e) => e.preventDefault()}>
+          {/* <form className="subscribe_form" onSubmit={(e) => e.preventDefault()}>
             <input type="email" placeholder="Enter your email" required />
             <button type="submit">Subscribe</button>
-          </form>
+          </form> */}
         </div>
 
         <div className="footer_links">
           <div className="column">
             <h4>Navigation</h4>
             <Link to="/">Home</Link>
-            <Link to="/">Services</Link>
             <Link to="/about">About us</Link>
             <Link to="/contact">Talk to an expert</Link>
           </div>
 
           <div className="column">
             <h4>Solutions</h4>
-            <Link to="/">Communication APIs</Link>
-            <Link to="/">Virtual Calling</Link>
-            <Link to="/">SIP Trunking</Link>
-            <Link to="/">A2P SMS</Link>
-            <Link to="/">P2A SMS</Link>
-            <Link to="/">P2P SMS</Link>
+            <Link to="/communication-apis">Communication APIs</Link>
+            <Link to="/virtual-calling">Virtual Calling</Link>
+            <Link to="/sip-trunking">SIP Trunking</Link>
+            <Link to="/a2p-messaging">A2P SMS</Link>
+            <Link to="/p2a-messaging">P2A SMS</Link>
+            <Link to="/p2p-messaging">P2P SMS</Link>
           </div>
 
-          <div className="column">
+          {/* <div className="column">
             <h4>Support</h4>
             <a href="#faq">FAQ</a>
             <a href="#articles">Articles</a>
             <a href="#community">Community</a>
             <a href="#help-center">Help Center</a>
-          </div>
+          </div> */}
         </div>
       </div>
 
