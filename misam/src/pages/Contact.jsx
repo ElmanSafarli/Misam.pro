@@ -152,10 +152,7 @@ const About = () => {
               <div className="contact-info-item">
                 <h4>Stay Connected</h4>
                 <div className="social_medias">
-                  <Link
-                    to="https://www.facebook.com/profile.php?id=100086738514430"
-                    aria-label="facebook"
-                  >
+                  <Link to="/" aria-label="facebook">
                     <FontAwesomeIcon icon={faFacebook} />
                   </Link>
                   <Link to="/" aria-label="linkedin">

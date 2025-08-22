@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import { Link as ScrollLink, Element as ScrollElement } from "react-scroll";
 import styled from "styled-components";
 
 import {
@@ -26,7 +27,9 @@ const Header = () => {
             every step of the way.
           </p>
           <div className="links">
-            <Link to="">Our Services </Link>
+            <ScrollLink to="products-section" smooth={true} duration={600}>
+              Our Services{" "}
+            </ScrollLink>
             <Link to="/contact">Talk to an expert</Link>
           </div>
         </div>
@@ -34,7 +37,10 @@ const Header = () => {
         <Partners />
       </header>
       <About />
-      <Products />
+      <ScrollElement name="products-section">
+        <Products />
+      </ScrollElement>
+
       <WhyChooseUs />
       <Faq />
       <ConsultExpert />

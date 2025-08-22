@@ -11,10 +11,11 @@ html {
   scroll-behavior: smooth;
   max-width: 1920px;
   margin: auto;
-  overflow-x: hidden;
+
 }
 
 body {
+  overflow-x: hidden;
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,4 +36,8 @@ a {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root {
+  overflow: hidden !important;
 }
