@@ -5,10 +5,15 @@ import { Route, Routes } from "react-router-dom";
 import { Loader } from "../../widgets";
 import { About, Contact, Home, ServicePage } from "../../pages";
 // Constants
-import { services } from "../../constants";
+import { servicesAz, servicesEn } from "../../constants";
+import { useLanguage } from "../../modules";
 
 const Navigate = () => {
   const [isLoading, setIsLoading] = useState(true);
+
+  const { language } = useLanguage();
+
+  const services = language === "en" ? servicesEn : servicesAz;
 
   useEffect(() => {
     const loadData = async () => {

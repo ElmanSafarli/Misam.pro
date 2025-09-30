@@ -1,4 +1,3 @@
-// src/components/widgets/MobileSidebar.jsx
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -8,7 +7,10 @@ import { services } from "../../constants";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown, faXmark } from "@fortawesome/free-solid-svg-icons";
 
+import { useLanguage } from "../../modules";
+
 const MobileSidebar = ({ isOpen, onClose, servicesOpen, setServicesOpen }) => {
+  const { language } = useLanguage();
   return (
     <>
       {isOpen && <Overlay onClick={onClose} />}
@@ -21,7 +23,7 @@ const MobileSidebar = ({ isOpen, onClose, servicesOpen, setServicesOpen }) => {
           <ul>
             <li>
               <Link to="/" onClick={onClose}>
-                Home
+                {language === "en" ? "Home" : "Ana səhifə"}
               </Link>
             </li>
             <li>
@@ -29,7 +31,7 @@ const MobileSidebar = ({ isOpen, onClose, servicesOpen, setServicesOpen }) => {
                 className={`dropdown-toggle ${servicesOpen ? "open" : ""}`}
                 onClick={() => setServicesOpen(!servicesOpen)}
               >
-                Services
+                {language === "en" ? "Services" : "Xidmətlər"}
                 <FontAwesomeIcon icon={faAngleDown} className="arrow" />
               </span>
               <Dropdown className={servicesOpen ? "open" : ""}>
@@ -52,7 +54,7 @@ const MobileSidebar = ({ isOpen, onClose, servicesOpen, setServicesOpen }) => {
             </li>
             <li>
               <Link to="/about" onClick={onClose}>
-                About us
+                {language === "en" ? "About us" : "Haqqımızda"}
               </Link>
             </li>
           </ul>

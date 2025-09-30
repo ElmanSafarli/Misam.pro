@@ -10,7 +10,10 @@ import {
   faTelegram,
 } from "@fortawesome/free-brands-svg-icons";
 
+import { useLanguage } from "../modules";
+
 const Footer = () => {
+  const { language } = useLanguage();
   return (
     <StyledFooter>
       <div className="footer_content max_width">
@@ -19,7 +22,7 @@ const Footer = () => {
             Let's <span>Connect</span> there
           </h2>
           <Link to="/contact">
-            <span>Contact us</span>
+            <span>{language === "en" ? "Contact us" : "Əlaqə"}</span>
             <span className="arrow">
               <svg
                 width="17"
@@ -49,8 +52,9 @@ const Footer = () => {
               </Link>
             </div>
             <p className="footer_text">
-              Misam — Trusted partner for global telecom solutions, messaging,
-              and network protection.
+              {language === "en"
+                ? "Misam — Trusted partner for global telecom solutions, messaging, and network protection."
+                : "Misam — Qlobal telekommunikasiya həlləri, mesajlaşma və şəbəkə qorunması üçün etibarlı tərəfdaş."}
             </p>
             <div className="social_links_f">
               <Link to="/" aria-label="facebook">
@@ -67,9 +71,9 @@ const Footer = () => {
 
           <div className="footer_links">
             <ul>
-              <h4>Navigation</h4>
+              <h4>{language === "en" ? "Navigation" : "Naviqasiya"}</h4>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">{language === "en" ? "Home" : "Ana səhifə"}</Link>
               </li>
               <li>
                 <Link to="/communication-apis">Communication APIs</Link>
@@ -91,7 +95,7 @@ const Footer = () => {
               </li>
             </ul>
             <ul>
-              <h4>Contact us</h4>
+              <h4>{language === "en" ? "Contact us" : "Bizimlə Əlaqə"}</h4>
               <li>
                 <a href="tel:+994555902775">+994 55 590 27 75</a>
               </li>
@@ -99,10 +103,11 @@ const Footer = () => {
                 <a href="mailto:info@misam.pro">info@misam.pro</a>
               </li>
               <li>
-                <a href="https://maps.app.goo.gl/TiaAcmSUrzbczyzJ8">
-                  Azerbaijan Republic, Baku 1014, Bülbül Prospekti, Gulustan
-                  Residence
-                </a>
+                <Link to="https://maps.app.goo.gl/TiaAcmSUrzbczyzJ8">
+                  {language === "en"
+                    ? "Azerbaijan Republic, Baku 1014, Bulbul Avenue, Gulustan Residence"
+                    : " Azerbaijan, Bakı 1014, Bülbül Prospekti, Gülüstan Residence"}
+                </Link>
               </li>
             </ul>
           </div>

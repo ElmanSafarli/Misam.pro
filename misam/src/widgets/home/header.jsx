@@ -12,25 +12,44 @@ import {
   WhyChooseUs,
 } from "../../widgets";
 
+import { useLanguage } from "../../modules";
+
 const Header = () => {
+  const { language } = useLanguage();
+
   return (
     <StyledWrapper>
       <header>
         <div className="header-content">
           <h1>
-            We connect <br /> You with your customers <br />{" "}
-            <span>Through their favorite </span>
-            <br /> Mobile devices.
+            {language === "en" ? "We connect" : "Biz əlaqə yaradırıq"} <br />
+            {language === "en"
+              ? "You with your customers"
+              : "Sizi müştərilərinizlə"}{" "}
+            <br />
+            <span>
+              {language === "en"
+                ? "Through their favorite"
+                : "Onların sevimli yolları ilə"}
+            </span>
+            <br />
+            {language === "en"
+              ? "Mobile devices."
+              : "Mobil cihazlar vasitəsilə."}
           </h1>
+
           <p>
-            We help you stay connected with clients worldwide and support you
-            every step of the way.
+            {language === "en"
+              ? "We help you stay connected with clients worldwide and support you every step of the way."
+              : "Misam, sizən ilə bağlı olmaq üçün müştəriləri və sizə ən son xidmətləri təklif edirik."}
           </p>
           <div className="links">
             <ScrollLink to="products-section" smooth={true} duration={600}>
-              Our Services{" "}
+              {language === "en" ? "Our Services" : "Xidmətlərimiz"}
             </ScrollLink>
-            <Link to="/contact">Talk to an expert</Link>
+            <Link to="/contact">
+              {language === "en" ? "Talk to an expert" : "Mütəxəssislə danışın"}
+            </Link>
           </div>
         </div>
 

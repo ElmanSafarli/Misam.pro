@@ -4,24 +4,34 @@ import { Link } from "react-router";
 import { BGCTA } from "../../shared";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useLanguage } from "../../modules";
 
 const ConsultExpert = () => {
-  const fullText = "Want to know more about how our technology is helping";
+  const { language } = useLanguage();
+  const fullText = `${
+    language === "en"
+      ? "Want to know more about how our technology helps?"
+      : "Texnologiyamızın necə kömək etdiyi haqqında daha çox bilmək istəyirsiniz?"
+  }`;
   const [displayedText, setDisplayedText] = useState("");
   const [index, setIndex] = useState(0);
   const [start, setStart] = useState(false);
 
-  // отслеживаем, когда блок появляется в зоне видимости
   const { ref, inView } = useInView({
-    threshold: 0.3, // 30% блока видно — стартуем
-    triggerOnce: true, // запустить один раз
+    threshold: 0.3,
+    triggerOnce: true,
   });
+
+  useEffect(() => {
+    setDisplayedText("");
+    setIndex(0);
+  }, [language]);
 
   useEffect(() => {
     if (inView) {
       setStart(true);
     }
-  }, [inView]);
+  }, [inView, language]);
 
   useEffect(() => {
     if (start && index < fullText.length) {
@@ -31,7 +41,7 @@ const ConsultExpert = () => {
       }, 50);
       return () => clearTimeout(timeout);
     }
-  }, [index, start]);
+  }, [index, start, fullText, language]);
 
   return (
     <StyledWrapper ref={ref}>
@@ -54,7 +64,9 @@ const ConsultExpert = () => {
                       {displayedText.includes("helping") ? " helping" : ""}
                     </span>
                   </motion.h3>
-                  <Link to="/contact">Book a call</Link>
+                  <Link to="/contact">
+                    {language === "en" ? "Book a call" : "Əlaqə saxla"}
+                  </Link>
                 </div>
               </div>
             </div>

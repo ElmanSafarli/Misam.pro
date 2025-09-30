@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { faqs } from "../../constants";
+import { faqEn, faqAz } from "../../constants";
+import { useLanguage } from "../../modules";
 
 const FaqSection = styled.section`
   .max_width {
@@ -105,6 +106,9 @@ const FaqAnswer = styled.div`
 
 const Faq = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { language } = useLanguage();
+
+  const faqs = language === "en" ? faqEn : faqAz;
 
   const toggleFaq = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
@@ -116,10 +120,18 @@ const Faq = () => {
         <FaqsContent>
           <SectionName>
             <div></div>
-            <p>Frequently Asked Questions</p>
+            <p>
+              {language === "en"
+                ? "Frequently Asked Questions"
+                : "Tez-tez verilən suallar"}
+            </p>
           </SectionName>
 
-          <FaqsTitle>Questions? Look here</FaqsTitle>
+          <FaqsTitle>
+            {language === "en"
+              ? "Questions? Look here"
+              : "Suallar? Cavablar burada"}
+          </FaqsTitle>
 
           <FaqsWrapper>
             {faqs.map((item, index) => (

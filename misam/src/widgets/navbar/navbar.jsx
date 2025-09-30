@@ -4,15 +4,29 @@ import styled from "styled-components";
 
 import { Logo, NavBTN } from "../../shared";
 import { services } from "../../constants";
-import { MobileSidebar } from "../../widgets";
+import { MobileSidebar, LangSwitcher } from "../../widgets";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+
+import { useLanguage } from "../../modules";
 
 const Navbar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const servicesRef = useRef(null);
+
+  const { language, setLanguage } = useLanguage();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (servicesRef.current && !servicesRef.current.contains(event.target)) {
+        setServicesOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -37,14 +51,14 @@ const Navbar = () => {
           <div className="nav_items">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">{language === "en" ? "Home" : "Ana səhifə"}</Link>
               </li>
               <li ref={servicesRef} className="dropdown">
                 <span
                   className="dropdown-toggle"
                   onClick={() => setServicesOpen(!servicesOpen)}
                 >
-                  Services
+                  {language === "en" ? "Services" : "Xidmətlər"}
                   <FontAwesomeIcon icon={faCaretDown} />
                 </span>
                 {servicesOpen && (
@@ -63,13 +77,20 @@ const Navbar = () => {
                 )}
               </li>
               <li>
-                <Link to="/about">About us</Link>
+                <Link to="/about">
+                  {language === "en" ? "About us" : "Haqqımızda"}
+                </Link>
               </li>
             </ul>
           </div>
 
+          <LangSwitcher language={language} setLanguage={setLanguage} />
+
           <div className="link">
-            <NavBTN content="Contact" link="/contact" />
+            <NavBTN
+              content={language === "en" ? "Contact" : "Əlaqə"}
+              link="/contact"
+            />
           </div>
 
           <div className="mobile_sidebar" onClick={() => setSidebarOpen(true)}>
@@ -197,7 +218,7 @@ const StyledWrapper = styled.div`
 
       .link {
         border-left: 1px solid #f8f8f8;
-        padding-left: 36px;
+        padding-left: 8px;
         height: 100%;
         display: flex;
         align-items: center;

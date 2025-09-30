@@ -1,13 +1,15 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { Navigate, ScrollToTop } from "./modules";
+import { Navigate, ScrollToTop, LanguageProvider } from "./modules";
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Navigate />
-    </BrowserRouter>
+    <LanguageProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Navigate />
+      </BrowserRouter>
+    </LanguageProvider>
   );
 }
 

@@ -3,39 +3,76 @@ import { ShieldCheck, Globe, Clock, BarChart3 } from "lucide-react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useLanguage } from "../../modules";
 
 const WhyChooseUs = () => {
-  const features = [
-    {
-      icon: <ShieldCheck size={40} strokeWidth={1.5} />,
-      title: "Reliable & Secure",
-      description: "Enterprise-grade security and uptime you can count on.",
+  const { language } = useLanguage();
+  const translations = {
+    en: {
+      heading: "Why choose us",
+      subtitle:
+        "Discover the key benefits that make our platform the trusted choice for businesses.",
+      features: [
+        {
+          icon: <ShieldCheck size={40} strokeWidth={1.5} />,
+          title: "Reliable & Secure",
+          description: "Enterprise-grade security and uptime you can count on.",
+        },
+        {
+          icon: <Globe size={40} strokeWidth={1.5} />,
+          title: "Global Coverage",
+          description: "Reach customers in over 190 countries worldwide.",
+        },
+        {
+          icon: <Clock size={40} strokeWidth={1.5} />,
+          title: "24/7 Support",
+          description: "Our team is here for you anytime, anywhere.",
+        },
+        {
+          icon: <BarChart3 size={40} strokeWidth={1.5} />,
+          title: "Scalable Solutions",
+          description:
+            "Easily grow your messaging capacity as your business expands.",
+        },
+      ],
     },
-    {
-      icon: <Globe size={40} strokeWidth={1.5} />,
-      title: "Global Coverage",
-      description: "Reach customers in over 190 countries worldwide.",
+    az: {
+      heading: "Niyə bizi seçməlisiniz",
+      subtitle:
+        "Bizim platformanı bizneslər üçün etibarlı seçim edən əsas üstünlükləri kəşf edin.",
+      features: [
+        {
+          icon: <ShieldCheck size={40} strokeWidth={1.5} />,
+          title: "Etibarlı və Təhlükəsiz",
+          description: "Yüksək səviyyəli təhlükəsizlik və sabit iş prinsipi.",
+        },
+        {
+          icon: <Globe size={40} strokeWidth={1.5} />,
+          title: "Qlobal Əhatə",
+          description: "Dünyanın 190-dan çox ölkəsində müştərilərə çatın.",
+        },
+        {
+          icon: <Clock size={40} strokeWidth={1.5} />,
+          title: "7/24 Dəstək",
+          description: "Komandamız hər zaman, hər yerdə yanınızdadır.",
+        },
+        {
+          icon: <BarChart3 size={40} strokeWidth={1.5} />,
+          title: "Miqyaslana bilən Həllər",
+          description:
+            "Biznesiniz böyüdükcə mesajlaşma imkanlarınızı asanlıqla artırın.",
+        },
+      ],
     },
-    {
-      icon: <Clock size={40} strokeWidth={1.5} />,
-      title: "24/7 Support",
-      description: "Our team is here for you anytime, anywhere.",
-    },
-    {
-      icon: <BarChart3 size={40} strokeWidth={1.5} />,
-      title: "Scalable Solutions",
-      description:
-        "Easily grow your messaging capacity as your business expands.",
-    },
-  ];
+  };
 
-  // Intersection Observer hook
+  const content = translations[language] || translations.en;
+
   const [ref, inView] = useInView({
-    triggerOnce: true, // анимация сработает только один раз
-    threshold: 0.2, // блок считается видимым, когда 20% его видимы
+    triggerOnce: true,
+    threshold: 0.2,
   });
 
-  // Motion variants
   const containerVariants = {
     hidden: {},
     visible: {
@@ -57,18 +94,15 @@ const WhyChooseUs = () => {
   return (
     <Section ref={ref}>
       <Container>
-        <h2>Why choose us</h2>
-        <p className="subtitle">
-          Discover the key benefits that make our platform the trusted choice
-          for businesses.
-        </p>
+        <h2>{content.heading}</h2>
+        <p className="subtitle">{content.subtitle}</p>
         <Cards
           as={motion.div}
           variants={containerVariants}
           initial="hidden"
-          animate={inView ? "visible" : "hidden"} // анимация запускается только при inView
+          animate={inView ? "visible" : "hidden"}
         >
-          {features.map((feature, index) => (
+          {content.features.map((feature, index) => (
             <Card key={index} as={motion.div} variants={cardVariants}>
               <IconWrapper>{feature.icon}</IconWrapper>
               <h3>{feature.title}</h3>
@@ -83,7 +117,6 @@ const WhyChooseUs = () => {
 
 export default WhyChooseUs;
 
-// Стили оставляем как есть
 const Section = styled.section`
   padding: 120px 4%;
   background: #0d0d0d;

@@ -5,7 +5,7 @@ import { ConsultExpert, Faq, Footer, Navbar, WhyChooseUs } from "../widgets";
 import { Link } from "react-router";
 import { services } from "../constants";
 import { AboutPage } from "../shared";
-import { Pagetitle } from "../modules";
+import { Pagetitle, useLanguage } from "../modules";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,11 +31,17 @@ const About = () => {
   const handleScrollToServices = () => {
     servicesRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+  const { language } = useLanguage();
+
   return (
     <>
       <Pagetitle
-        title="About Misam"
-        description="Misam is a modern communication platform that helps brands reach their customers on their favorite devices — quickly, reliably, and at scale"
+        title={language === "en" ? "About Misam" : "Misam haqqında"}
+        description={
+          language === "en"
+            ? "Misam is a modern communication platform that helps brands reach their customers on their favorite devices — quickly, reliably, and at scale"
+            : "Misam brendlərə müştərilərinə sevimli cihazlarında tez, etibarlı və miqyasda çatmağa kömək edən müasir kommunikasiya platformasıdır."
+        }
       />
       <StyledWrapper>
         <Navbar />
@@ -53,17 +59,26 @@ const About = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.6 }}
               >
-                Misam helps implement effective{" "}
-                <span>communication strategies</span> in the digital world
+                {language === "en"
+                  ? "Misam rəqəmsal dünyada effektiv"
+                  : "Misam rəqəmsal dünyada effektiv"}{" "}
+                <span>
+                  {language === "en"
+                    ? "communication strategies"
+                    : "kommunikasiya strategiyalarının"}
+                </span>{" "}
+                {language === "en"
+                  ? "in the digital world"
+                  : "həyata keçirilməsinə kömək edir"}
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.6 }}
               >
-                Misam is a modern communication platform that helps brands reach
-                their customers on their favorite devices — quickly, reliably,
-                and at scale
+                {language === "en"
+                  ? "Misam is a modern communication platform that helps brands reach their customers on their favorite devices — quickly, reliably, and at scale"
+                  : "Misam brendlərə müştərilərinə sevimli cihazlarında tez, etibarlı və miqyasda çatmağa kömək edən müasir kommunikasiya platformasıdır."}
               </motion.p>
 
               <motion.div
@@ -73,13 +88,13 @@ const About = () => {
                 transition={{ delay: 0.7, duration: 0.6 }}
               >
                 <Link to="/contact" className="btn-primary">
-                  Get Started
+                  {language === "en" ? "Get Started" : "Başla"}
                 </Link>
                 <button
                   onClick={handleScrollToServices}
                   className="btn-secondary"
                 >
-                  Learn More
+                  {language === "en" ? "Learn More" : "Daha ətraflı"}
                 </button>
               </motion.div>
             </div>

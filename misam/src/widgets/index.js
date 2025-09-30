@@ -1,5 +1,7 @@
 export { default as Navbar } from "./navbar/navbar";
 export { default as MobileSidebar } from "./navbar/MobileSidebar";
+export { default as LangSwitcher } from "./navbar/lang_switcher";
+
 export { default as Header } from "./home/header";
 export { default as Partners } from "./home/partners";
 export { default as About } from "./home/about";
@@ -7,5 +9,6 @@ export { default as Products } from "./home/products";
 export { default as ConsultExpert } from "./home/ConsultExpert";
 export { default as WhyChooseUs } from "./home/WhyChooseUs";
 export { default as Faq } from "./home/faq";
+
 export { default as Loader } from "./Loader";
 export { default as Footer } from "./Footer";

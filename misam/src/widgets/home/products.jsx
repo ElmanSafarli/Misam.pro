@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
-import { services } from "../../constants";
+import { servicesAz, servicesEn } from "../../constants";
+import { useLanguage } from "../../modules";
 
 const Services = () => {
   const [activeCard, setActiveCard] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
   const [cardsPerStep, setCardsPerStep] = useState(4);
+
+  const { language } = useLanguage();
+
+  const services = language === "en" ? servicesEn : servicesAz;
 
   useEffect(() => {
     const updateStep = () => {
@@ -35,11 +40,11 @@ const Services = () => {
   return (
     <StyledWrapper>
       <div className="section-header">
-        <h2>Our products</h2>
+        <h2>{language === "en" ? "Our products" : "Xidmətlər"}</h2>
         <p>
-          We provide all-in-one SMS services — from data cleaning to campaign
-          launch — with a simple interface that integrates seamlessly into your
-          business.
+          {language === "en"
+            ? " We provide all-in-one SMS services — from data cleaning to campaign launch — with a simple interface that integrates seamlessly into your business."
+            : "Biz biznesinizə mükəmməl inteqrasiya edən sadə interfeys ilə məlumatların təmizlənməsindən kampaniyanın başlanmasına qədər hamısı bir yerdə SMS xidmətləri təqdim edirik."}
         </p>
       </div>
 

@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { Navbar, Footer, ConsultExpert } from "../widgets";
-import { Pagetitle } from "../modules";
+import { Pagetitle, useLanguage } from "../modules";
 
 const ServicePage = ({ data }) => {
+  const { language } = useLanguage();
   return (
     <>
       <Pagetitle
@@ -12,7 +13,6 @@ const ServicePage = ({ data }) => {
       />
       <Navbar />
       <StyledWrapper>
-        {/* Header */}
         <header className="service-header">
           <div className="content">
             <div className="text">
@@ -42,7 +42,12 @@ const ServicePage = ({ data }) => {
 
           {data.benefits && (
             <section className="benefits card">
-              <h2>Benefits of Using {data.title}</h2>
+              <h2>
+                {language === "en"
+                  ? "Benefits of Using"
+                  : "İstifadənin Faydaları"}{" "}
+                {data.title}
+              </h2>
               <ul>
                 {data.benefits.map((b, i) => (
                   <li key={i}>{b}</li>
@@ -53,7 +58,11 @@ const ServicePage = ({ data }) => {
 
           {data.whyChoose && (
             <section className="why-choose card">
-              <h2>Why Choose Our {data.title} Service?</h2>
+              <h2>
+                {language === "en" ? "Why Choose Our" : "Niyə bizim"}{" "}
+                {data.title}{" "}
+                {language === "en" ? "Service?" : "xidmətimizi seçməlisiniz?"}{" "}
+              </h2>
               <ul>
                 {data.whyChoose.map((w, i) => (
                   <li key={i}>{w}</li>

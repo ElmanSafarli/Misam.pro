@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { useLanguage } from "../../modules";
 
 const fadeInLeft = {
   hidden: { opacity: 0, x: -50 },
@@ -14,6 +15,8 @@ const fadeInRight = {
 };
 
 const About = () => {
+  const { language } = useLanguage();
+
   return (
     <StyledWrapper>
       <section>
@@ -28,20 +31,23 @@ const About = () => {
           >
             <div className="top">
               <div className="section_name">
-                <p>About us</p>
+                <p>{language === "en" ? "About us" : "Haqqımızda"}</p>
               </div>
               <h2>
-                Misam helps implement effective communication strategies in the
-                digital world.
+                {language === "en"
+                  ? "We help you stay connected with clients worldwide and support you every step of the way."
+                  : "Misam, sizən ilə bağlı olmaq üçün müştəriləri və sizə ən son xidmətləri təklif edirik."}
               </h2>
             </div>
             <div className="bottom">
               <p>
-                Misam is a modern communication platform that helps brands reach
-                their customers on their favorite devices — quickly, reliably,
-                and at scale.
+                {language === "en"
+                  ? "Misam is a modern communication platform that helps brands reach their customers on their favorite devices — quickly, reliably, and at scale."
+                  : "Misam brendlərə müştərilərinə sevimli cihazlarında tez, etibarlı və miqyasda çatmağa kömək edən müasir kommunikasiya platformasıdır."}
               </p>
-              <Link to="/about">Read more</Link>
+              <Link to="/about">
+                {language === "en" ? "Read more" : "Daha ətraflı"}
+              </Link>
             </div>
           </motion.div>
 
@@ -60,11 +66,14 @@ const About = () => {
               <div className="corner bottom-right"></div>
 
               <h3>
-                <strong>120k</strong> Users
+                {language === "en"
+                  ? "Misam add value"
+                  : "Misam əlavə dəyər verir"}
               </h3>
               <p>
-                Recruiters and hiring managers trust our tools to simplify
-                decision-making and reduce time-to-hire.
+                {language === "en"
+                  ? "The time people spend using their mobile phone is increasing with each passing year."
+                  : "İnsanların mobil telefondan istifadəyə sərf etdikləri vaxt hər il artır."}
               </p>
             </div>
 
@@ -74,12 +83,11 @@ const About = () => {
               <div className="corner bottom-left"></div>
               <div className="corner bottom-right"></div>
 
-              <h3>
-                <strong>95%</strong> Satisfaction
-              </h3>
+              <h3>{language === "en" ? "We Are Experts" : "Biz Ekspertik"}</h3>
               <p>
-                Our clients report better engagement and higher efficiency using
-                our solutions.
+                {language === "en"
+                  ? "Technology is developing exponentially, delivering new possibilities and posing new challenges."
+                  : "Texnologiya eksponent olaraq inkişaf edir, yeni imkanlar təqdim edir və yeni problemlər yaradır"}
               </p>
             </div>
           </motion.div>
