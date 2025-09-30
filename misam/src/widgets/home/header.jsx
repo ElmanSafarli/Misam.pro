@@ -22,20 +22,18 @@ const Header = () => {
       <header>
         <div className="header-content">
           <h1>
-            {language === "en" ? "We connect" : "Biz əlaqə yaradırıq"} <br />
+            {language === "en" ? "We connect" : "Sevimli mobil"} <br />
             {language === "en"
               ? "You with your customers"
-              : "Sizi müştərilərinizlə"}{" "}
+              : "cihazları vasitəsilə"}{" "}
             <br />
             <span>
               {language === "en"
                 ? "Through their favorite"
-                : "Onların sevimli yolları ilə"}
+                : "sizi müştərilərinizlə"}
             </span>
             <br />
-            {language === "en"
-              ? "Mobile devices."
-              : "Mobil cihazlar vasitəsilə."}
+            {language === "en" ? "Mobile devices." : "əlaqələndiririk."}
           </h1>
 
           <p>
